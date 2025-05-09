@@ -1,0 +1,51 @@
+name: CI for Devcontainer
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: develop-erpnext_development-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    name: Container Tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Build devcontainer
+        run: |
+          docker-compose -f .devcontainer/docker-compose.yml build
+
+      - name: Start devcontainer
+        run: |
+          docker-compose -f .devcontainer/docker-compose.yml up -d
+
+      - name: Wait for containers to be healthy
+        run: sleep 30
+
+      - name: Test devcontainer
+        run: |
+          docker ps
+          docker exec devcontainer-frappe-1 /home/frappe/initBench.sh
+
+      - name: Tear down containers
+        if: always()
+        run: |
+          docker-compose -f .devcontainer/docker-compose.yml down
