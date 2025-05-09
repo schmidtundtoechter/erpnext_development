@@ -43,7 +43,7 @@ jobs:
       - name: Test devcontainer
         run: |
           docker ps
-          docker exec devcontainer-frappe-1 /home/frappe/initBench.sh
+          docker exec devcontainer_frappe_1 /home/frappe/initBench.sh
 
       - name: Tear down containers
         if: always()
