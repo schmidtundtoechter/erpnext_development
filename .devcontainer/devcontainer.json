@@ -5,6 +5,9 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "vscode.git",
+        "github.vscode-pull-request-github",
+        "ms-vscode.git",
         "ms-python.python",
         "ms-vscode.live-server",
         "grapecity.gc-excelviewer",
@@ -18,7 +21,10 @@
           }
         },
         "terminal.integrated.defaultProfile.linux": "frappe bash",
-        "debug.node.autoAttach": "disabled"
+        "debug.node.autoAttach": "disabled",
+        "git.scanSubfolders": true,
+        "git.autoRepositoryDetection": true,
+        "git.autoRepositoryDetectionDelay": 100
       }
     }
   },
