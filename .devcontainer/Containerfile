@@ -128,6 +128,8 @@ COPY --from=builder --chown=frappe:frappe /home/frappe/frappe-bench /home/frappe
 
 WORKDIR /home/frappe/frappe-bench
 
+# VOLUMES NEED TO BE REMOVED FROM THE IMAGE
+
 CMD [ \
   "/home/frappe/frappe-bench/env/bin/gunicorn", \
   "--chdir=/home/frappe/frappe-bench/sites", \

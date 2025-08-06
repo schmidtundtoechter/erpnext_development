@@ -2,6 +2,7 @@ version: "3.7"
 services:
   mariadb:
     image: docker.io/mariadb:10.6
+    #platform: linux/amd64 removed !!!
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
@@ -37,6 +38,8 @@ services:
 
   redis-cache:
     image: docker.io/redis:alpine
+    #platform: linux/amd64 removed !!!
+    # tmpfs is used to avoid issues with Redis persistence in development
     tmpfs:
       - /data
     # volumes:
@@ -44,6 +47,8 @@ services:
 
   redis-queue:
     image: docker.io/redis:alpine
+    #platform: linux/amd64 removed !!!
+    # tmpfs is used to avoid issues with Redis persistence in development
     tmpfs:
       - /data
     # volumes:
@@ -98,6 +103,7 @@ volumes:
   #postgresql-data:
   frappe_docker_volume:
     driver: local
+  # volumes added to avoid temp volumes being created
   frappe_sites:
     driver: local
   frappe_logs:
