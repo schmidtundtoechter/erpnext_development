@@ -36,7 +36,7 @@ bench set-config -g redis_socketio redis://redis-cache:6379
 echo "### STEP 8 Create a new site"
 # sitename MUST end with .localhost for trying deployments locally.
 # MariaDB root password: 123
-bench new-site d-code.localhost --no-mariadb-socket 
+bench new-site d-code.localhost --no-mariadb-socket --mariadb-root-password 123 --admin-password admin 
 
 echo "### STEP 9 Set bench developer mode on the new site"
 bench --site d-code.localhost set-config developer_mode 1
