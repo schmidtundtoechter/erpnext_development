@@ -1,7 +1,6 @@
 #!/bin/bash
 
 sudo chmod 666 /var/run/docker.sock
-rsync -avP /workspace-local/development/ /workspace/development/
 
 if [ -d /home/frappe/.ssh-mount ]; then
     echo "### STEP 5.5 Copy ssh keys"
