@@ -1,5 +1,5 @@
 {
-  "name": "Frappe Bench",
+  "name": "erpnext_development",
   "forwardPorts": [8000, 9000, 6787],
   "remoteUser": "frappe",
   "customizations": {
@@ -12,7 +12,8 @@
         "ms-vscode.live-server",
         "grapecity.gc-excelviewer",
         "mtxr.sqltools",
-        "visualstudioexptteam.vscodeintellicode"
+        "visualstudioexptteam.vscodeintellicode",
+        "vstirbu.vscode-mermaid-preview"
       ],
       "settings": {
         "terminal.integrated.profiles.linux": {
