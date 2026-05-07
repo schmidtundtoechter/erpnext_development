@@ -34,7 +34,7 @@ RUN useradd -ms /bin/bash frappe
 # Install system packages
 RUN apt-get update && apt-get install -y \
     # Basic tools
-    curl cron \
+    curl cron file jq \
     git \
     sudo \
     rsync \
