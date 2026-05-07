@@ -39,23 +39,8 @@ bench --site d-code.localhost set-config developer_mode 1
 bench --site d-code.localhost clear-cache
 
 echo "### STEP 10 Install ERPNext with full git repository"
-# Clone ERPNext as a full git repository to maintain git functionality and allow updates
-pushd apps
-git clone https://github.com/frappe/erpnext.git
-
-pushd erpnext
-# Switch to the correct version branch
-git checkout version-${ERPNEXT_VERSION}
-
-# Ensure we're tracking the remote branch properly for updates
-git branch --set-upstream-to=origin/version-${ERPNEXT_VERSION} version-${ERPNEXT_VERSION}
-
-# Return to previous directories
-popd  # Back to apps
-popd  # Back to frappe-bench
-
-# Install the app from the local git repository
-bench install-app erpnext
+# Get the ERPnext app
+bench get-app erpnext --branch version-${ERPNEXT_VERSION}
 
 # Install ERPNext on the site
 bench --site d-code.localhost install-app erpnext
