@@ -15,6 +15,7 @@ RUN echo "Install docker for arch=${TARGETARCH}" && apt-get update && apt-get in
     wget \
     vim \
     git \
+    iputils-ping \
     software-properties-common \
     gnupg-agent && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
