@@ -29,7 +29,7 @@ services:
       - frappe_docker_volume:/workspace:cached
       - frappe_sites:/home/frappe/frappe-bench/sites
       - frappe_logs:/home/frappe/frappe-bench/logs
-      - ..:/workspace/development/erpnext_development:uid=$(id -u),gid=$(id -g)
+      - ..:/workspace/development/host-repo:uid=$(id -u),gid=$(id -g)
       - ~/.ssh:/home/frappe/.ssh-mount
       - /var/run/docker.sock:/var/run/docker.sock
       - ./README.md:/workspace/development/README.md:cached
