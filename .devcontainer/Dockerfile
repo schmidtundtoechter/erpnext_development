@@ -54,6 +54,16 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
+# Install wkhtmltopdf (mit gepatchtem Qt) für die PDF-Erzeugung von Druckformaten.
+# Das Distro-Paket ist ohne Patch und benötigt einen X-Server; das offizielle
+# wkhtmltox-Paket läuft headless.
+RUN WKHTML_ARCH="${TARGETARCH:-$(dpkg --print-architecture)}" \
+    && apt-get update \
+    && curl -fsSL -o /tmp/wkhtmltox.deb \
+       "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_${WKHTML_ARCH}.deb" \
+    && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
+    && rm -rf /tmp/wkhtmltox.deb /var/lib/apt/lists/*
+
 # Install Node.js
 RUN mkdir -p ${NVM_DIR} \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash \

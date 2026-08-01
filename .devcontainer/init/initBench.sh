@@ -34,6 +34,11 @@ echo "### STEP 8 Create a new site"
 # sitename MUST end with .localhost for trying deployments locally.
 bench new-site d-code.localhost --mariadb-user-host-login-scope='%' --mariadb-root-password 123 --admin-password admin 
 
+echo "### STEP 8.5 Add site to /etc/hosts (damit wkhtmltopdf die Print-Assets auflösen kann)"
+# Ohne diesen Eintrag scheitert die PDF-Erzeugung mit 'HostNotFoundError',
+# weil wkhtmltopdf die Asset-URLs (http://d-code.localhost:8000/assets/...) nicht auflöst.
+grep -q "d-code.localhost" /etc/hosts || echo "127.0.0.1 d-code.localhost" | sudo tee -a /etc/hosts
+
 echo "### STEP 9 Set bench developer mode on the new site"
 bench --site d-code.localhost set-config developer_mode 1
 bench --site d-code.localhost clear-cache
