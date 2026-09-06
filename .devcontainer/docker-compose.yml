@@ -7,6 +7,15 @@ services:
       - --collation-server=utf8mb4_unicode_ci
       - --skip-character-set-client-handshake
       - --skip-innodb-read-only-compressed # Temporary fix for MariaDB 10.6
+      # E119/Tuning 29.08.2026: Die Importdatenbank ist rund 4 GB gross, der
+      # Vorgabe-Puffer 128 MB -- 3 % passten in den Speicher. Jede Transaktion
+      # ging auf die Platte, blieb dadurch laenger offen und kollidierte oefter
+      # mit den parallelen Abschnitten. Groesster Einzelhebel fuer Tempo *und*
+      # Verklemmungen.
+      - --innodb-buffer-pool-size=2G
+      # Kein fsync bei jedem Commit. Auf einer Entwicklungsinstanz unbedenklich
+      # (Risiko nur bei Absturz des Wirtssystems), vor Produktion zurueck auf 1.
+      - --innodb-flush-log-at-trx-commit=2
     environment:
       MYSQL_ROOT_PASSWORD: 123
     volumes:
